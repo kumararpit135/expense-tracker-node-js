@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form" >
+        <lable for="name">Name:</lable>
+        <input type="text" id="name" name="name" required>
+        <lable for="email">Email:</lable>
+        <input type="email" id="email" name="email" required>
+        <lable for="password">Name:</lable>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">signup</button>
+
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const form=document.getElementById('form')
+        form.addEventListener('submit',(event)=>{
+            event.preventDefault()
+            const myObj={
+                Name:document.getElementById('name').value,
+                Email:document.getElementById('email').value,
+                Password:document.getElementById('password').value
+            }
+            axios.post("http://localhost:3000/signup",myObj).then(result=>{
+                console.log(result);
+            }).catch(er=>{
+                console.log(er)
+            })
+        })
+            
+        
+    </script>
+</body>
+</html>
