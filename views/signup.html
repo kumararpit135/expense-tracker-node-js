@@ -11,10 +11,10 @@
         <input type="text" id="name" name="name" required>
         <lable for="email">Email:</lable>
         <input type="email" id="email" name="email" required>
-        <lable for="password">Name:</lable>
+        <lable for="password">Password:</lable>
         <input type="password" id="password" name="password" required>
         <button type="submit">signup</button>
-
+        <a href="login.html" >login here </a>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
@@ -27,9 +27,11 @@
                 Password:document.getElementById('password').value
             }
             axios.post("http://localhost:3000/signup",myObj).then(result=>{
+                alert("done")
                 console.log(result);
             }).catch(er=>{
                 console.log(er)
+                alert('cancel')
             })
         })
             
