@@ -6,6 +6,37 @@
     <title>Document</title>
 </head>
 <body>
-    <h>hiiidhsdhflahl</h>
+    <form id="form" >
+        <lable for="email">Email:</lable>
+        <input type="email" id="email" name="email" required>
+        <lable for="password">Password:</lable>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">login</button>
+        <hr>
+        <a href="signup.html" > please register here </a>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const form=document.getElementById('form');
+        form.addEventListener('submit',(event)=>{
+            event.preventDefault();
+            const myObj={
+                Email:document.getElementById('email').value,
+                Password:document.getElementById('password').value 
+            }
+            axios.post("http://localhost:3000/login",myObj).then(result=>{
+                console.log(result)
+                if(result.data===false){
+                    alert('password does not match')
+                }
+                else{alert('login succes fully')}
+            }).catch(er=>{
+                console.log(er)
+                alert("user does not exits")
+            })
+
+        })
+    </script>
 </body>
 </html>

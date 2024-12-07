@@ -1,7 +1,7 @@
 const express=require('express')
 const router=express.Router()
 const mysqul=require('mysql2/promise');
-const { SELECT } = require('sequelize/lib/query-types');
+
 
 
 const pool=mysqul.createPool({
