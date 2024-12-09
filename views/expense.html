@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form"><lable for="expense">Expense Amount:</lable>
+        <input type="number" id="expense" name="expense" required>
+        <lable for="dicription">Expense Dicription:</lable>
+        <input type="text" id="dicription" name="dicription" required>
+        <lable for="category">Category:</lable>
+        <input type="text" id="category" name="category">
+        <button type="submit">login</button>
+    </form>
+    <hr>
+    <ul id="list"></ul>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const form=document.getElementById('form')
+        const list=document.getElementById('list')
+        form.addEventListener('submit',(event)=>{
+            event.preventDefault()
+            const myObj={
+                expense:event.target.expense.value,
+                dicription:event.target.dicription.value,
+                category:event.target.category.value
+
+            }
+            console.log(myObj)
+            axios.post("http://localhost:3000/expense",myObj).then(result=>{
+                fetchUser()
+                
+            }).catch(err=>{
+                console.log(err)
+            })
+        })
+        
+        function dispalay(myObj){
+            console.log(myObj,"dfsafksah")
+            const li=document.createElement('li')
+            li.innerHTML=`${myObj.amount}-${myObj.description}-${myObj.category}`
+            const delBtn=document.createElement('button')
+            delBtn.textContent='delete'
+            li.appendChild(delBtn)
+            list.appendChild(li)
+            delBtn.addEventListener('click',()=>{
+                deleteExpense(myObj)
+            })
+
+        }
+        function deleteExpense(obj){
+            axios.delete(`http://localhost:3000/expense/${obj.id}`).then(result=>{
+
+                fetchUser()
+                console.log(result)
+            }
+            ).catch(err=>console.log(err))
+        }
+        function fetchUser(){
+            axios.get("http://localhost:3000/expense").then(result=>{
+                list.innerHTML=""
+                for(let i=0;i<result.data.length;i++){
+                   // console.log(result.data[i])
+                    dispalay(result.data[i])
+                }
+            }).catch(err=>console.log(err))
+        }
+        fetchUser()
+    </script>
+</body>
+</html>

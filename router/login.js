@@ -2,7 +2,7 @@
 const express=require('express')
 const router=express.Router()
 const mysqul=require('mysql2/promise');
-
+const bcrypt=require('bcrypt')
 
 
 const pool=mysqul.createPool({
@@ -13,23 +13,26 @@ const pool=mysqul.createPool({
 });
 router.post('/login',async(req,res)=>{
     const {Email,Password}=req.body;
-    //console.log(req.body,"hgfhgff")
+    console.log(req.body,"hgfhgff")
     try{
         const [user]=await pool.execute("SELECT * FROM users WHERE email =?",[Email])
+        console.log(user,'fkdkj')
         if (user.length>0){
 
-            const userPassword=user[0]
-            console.log("password check := "+Password,userPassword.password)
-            if(this.toString(userPassword.Password)===this.toString(Password)){
+            const userPassword=user[0].password
+            
+            console.log("password check := "+Password,userPassword)
+            const comaprePassword=await bcrypt.compare(Password,userPassword)
+            if(comaprePassword){
                 console.log("dfhkhdfsk")
-                res.status(200).json(user);
+                res.status(200).json({message:"user login successfully"});
             }
             else{
-                res.status(200).json(false)
+                res.status(401).json({message:"password incorrect"})
             }
         }
         else{
-            res.status(400).json("you cant not ragisterd this")
+            res.json({message:"you haven't signup"})
         }
         
     }catch(err){

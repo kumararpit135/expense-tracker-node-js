@@ -26,11 +26,10 @@
                 Password:document.getElementById('password').value 
             }
             axios.post("http://localhost:3000/login",myObj).then(result=>{
-                console.log(result)
-                if(result.data===false){
-                    alert('password does not match')
-                }
-                else{alert('login succes fully')}
+                console.log(result.data.message)
+               
+                alert(result.data.message)
+                
             }).catch(er=>{
                 console.log(er)
                 alert("user does not exits")

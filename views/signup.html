@@ -28,7 +28,7 @@
             }
             axios.post("http://localhost:3000/signup",myObj).then(result=>{
                 alert("done")
-                console.log(result);
+                console.log(result.message);
             }).catch(er=>{
                 console.log(er)
                 alert('cancel')

@@ -1,8 +1,7 @@
 const express=require('express')
 const router=express.Router()
 const mysqul=require('mysql2/promise');
-
-
+const bcrypt=require('bcrypt')
 
 const pool=mysqul.createPool({
     host:'localhost',
@@ -16,11 +15,14 @@ router.post('/signup',async(req,res)=>{
     try{
         const [check]=await pool.execute("SELECT * FROM users WHERE email =?",[Email])
         if (check.length>0){
-            res.status(400).json("you cant not ragisterd this")
+            res.status(400).json({message:"you cant not ragisterd this"})
         }
         else{
-            const [result]=await pool.execute("INSERT INTO users (name,email,password) VALUES(?,?,?)",[Name,Email,Password]);
-            res.json(result)
+            const saltround=10;
+            const hashPassword=await bcrypt.hash(Password,saltround)
+            console.log(hashPassword)
+            const [result]=await pool.execute("INSERT INTO users (name,email,password) VALUES(?,?,?)",[Name,Email,hashPassword]);
+            res.json({message:"done the storing part"})
         }
         
     }catch(err){
