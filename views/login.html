@@ -14,8 +14,11 @@
         <button type="submit">login</button>
         <hr>
         <a href="signup.html" > please register here </a>
+        <hr><hr>
+        <a href="forgot.html">forgot your passowrd</a>
     </form>
-
+    
+    <a herf="forget.html"><h5>forgot your password</h5></a>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const form=document.getElementById('form');
@@ -26,10 +29,14 @@
                 Password:document.getElementById('password').value 
             }
             axios.post("http://localhost:3000/login",myObj).then(result=>{
-                console.log(result.data.message)
-               
-                alert(result.data.message)
-                
+                if(result.data.true ===true){
+                    alert(result.data.message)
+                    localStorage.setItem('token',result.data.token)
+
+                    window.location.href = "expense.html"
+
+                }
+                else{alert('user passowrd does not match')}
             }).catch(er=>{
                 console.log(er)
                 alert("user does not exits")
