@@ -8,19 +8,19 @@ const AWS=require('aws-sdk');
 
 const mysqul=require('mysql2/promise');
 const jwt=require('jsonwebtoken');
-
+require('dotenv').config();
 const pool=mysqul.createPool({
-    host:'localhost',
-    user:'root',
-    database:'expensetracker',
-    password:'20130008890'
+    host:process.env.HOST,
+    user:process.env.USER,
+    database:process.env.DATABASE,
+    password:process.env.PASSWORD
 });
 
 
 function uploadToS3(data,fileName){
- //   const BUCKET_NAME='expensetrackingapp';
- //   const I_AM_USER_KEY='AKIA2FXADTU2NFN5DZN7';
- //   const I_AM_USER_SECRET='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';
+    const BUCKET_NAME=process.env.BUCKET_NAME;
+    const I_AM_USER_KEY=process.env.I_AM_USER_KEY;
+    const I_AM_USER_SECRET=process.env.I_AM_USER_SECRET;
     let S3bucket=new AWS.S3({
         accessKeyId:I_AM_USER_KEY,
         secretAccessKey:I_AM_USER_SECRET,

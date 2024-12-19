@@ -1,4 +1,5 @@
 const express=require('express');
+const https=require('https');
 const signupRouter=require('./router/signup');
 const loginRouter=require('./router/login');
 const bodypharser=require('body-parser');
@@ -12,7 +13,8 @@ const fs=require('fs')
 const cors=require('cors');
 const morgon=require('morgan');
 const path=require('path');
-
+const privekey=fs.readFileSync('server.key')
+const certificate=fs.readFileSync('server.cert');
 
 
 const app=express();
@@ -31,6 +33,7 @@ app.use(loginRouter);
 app.use(signupRouter);
 app.use('/',(req,res,next)=>{
     console.log('hi how are you i am here for your help in the en dof th request handlesr')
+    res.send("fsadflasjdfl")
     
 })
 app.listen(process.env.port,()=>{

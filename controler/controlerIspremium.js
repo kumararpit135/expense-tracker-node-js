@@ -1,12 +1,12 @@
 const express=require('express')
 
 const mysqul=require('mysql2/promise');
-
+require('dotenv').config();
 const pool=mysqul.createPool({
-    host:'localhost',
-    user:'root',
-    database:'expensetracker',
-    password:'20130008890'
+    host:process.env.HOST,
+    user:process.env.USER,
+    database:process.env.DATABASE,
+    password:process.env.PASSWORD
 });
 
 

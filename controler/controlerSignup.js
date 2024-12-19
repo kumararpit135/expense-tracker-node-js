@@ -1,14 +1,14 @@
 const express=require('express')
-
+require('dotenv').config();
 const mysqul=require('mysql2/promise');
 const bcrypt=require('bcrypt');
-
+console.log(process.env.DB_HOST)
 
 const pool=mysqul.createPool({
-    host:'localhost',
-    user:'root',
-    database:'expensetracker',
-    password:'20130008890'
+    host:process.env.DB_HOST,
+    user:process.env.DB_USER,
+    database:process.env.DB_DATABASE,
+    password:process.env.DB_PASSWORD
 });
 
 

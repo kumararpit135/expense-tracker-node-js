@@ -4,14 +4,15 @@ const mysqul=require('mysql2/promise')
 const bodyParser = require('body-parser');
 const controlerIspremium=require('../controler/controlerIspremium')
 const Razorpay = require('razorpay');
-require('dotenv').config();
+
 const verification=require('../middlware/verifyToken');
 const { route } = require('./order');
+require('dotenv').config();
 const pool=mysqul.createPool({
-    host:'localhost',
-    user:'root',
-    database:'expensetracker',
-    password:'20130008890'
+    host:process.env.DB_HOST,
+    user:process.env.DB_USER,
+    database:process.env.DB_DATABASE,
+    password:process.env.DB_PASSWORD
 });
 
 router.post('/leaderbord',async(req,res)=>{

@@ -1,15 +1,15 @@
 
 const express=require('express')
-
+require('dotenv').config();
 const mysqul=require('mysql2/promise');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 
 const pool=mysqul.createPool({
-    host:'localhost',
-    user:'root',
-    database:'expensetracker',
-    password:'20130008890'
+    host:process.env.HOST,
+    user:process.env.USER,
+    database:process.env.DATABASE,
+    password:process.env.PASSWORD
 });
 
 function generateToekn(id){
