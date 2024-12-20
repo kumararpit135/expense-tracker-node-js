@@ -39,6 +39,9 @@ app.use('/',(req,res,next)=>{
     res.send("fsadflasjdfl")
     
 })
-app.listen(process.env.port,()=>{
-    console.log('yes listeningngngnnghah')
-})
+https.createServer({
+    key: privateKey,
+    cert: certificate
+}, app).listen(process.env.PORT || 3000, () => {
+    console.log('HTTPS server is running');
+});
