@@ -31,14 +31,12 @@ app.use(expenseRouter);
 app.use(orderRouter)
 app.use(loginRouter);
 app.use(signupRouter);
-app.use((req,res)=>{
-    res.sendFile(path.join(__dirname,`public/login.html`))
-})
-/*app.use('/',(req,res,next)=>{
+
+app.use('/',(req,res,next)=>{
     console.log('hi how are you i am here for your help in the en dof th request handlesr')
     res.send("fsadflasjdfl")
     
-})*/
+})
 app.listen(process.env.port,()=>{
     console.log('yes listeningngngnnghah')
 })
