@@ -39,9 +39,6 @@ app.use('/',(req,res,next)=>{
     res.send("fsadflasjdfl")
     
 })
-https.createServer({
-    key: privateKey,
-    cert: certificate
-}, app).listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('HTTPS server is running');
 });
