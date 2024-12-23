@@ -28,7 +28,7 @@
                 Email:document.getElementById('email').value,
                 Password:document.getElementById('password').value 
             }
-            axios.post("http://3.85.135.17:3000/login",myObj).then(result=>{
+            axios.post("http://localhost:3000/login",myObj).then(result=>{
                 if(result.data.true ===true){
                     alert(result.data.message)
                     localStorage.setItem('token',result.data.token)
@@ -36,7 +36,7 @@
                     window.location.href = "expense.html"
 
                 }
-                else{alert('user passowrd does not match')}
+                else{alert(result.data.message)}
             }).catch(er=>{
                 console.log(er)
                 alert("user does not exits")

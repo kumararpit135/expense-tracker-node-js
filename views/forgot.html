@@ -21,7 +21,7 @@
             const email=document.getElementById('email').value;
             const token=localStorage.getItem('token')
             console.log(email)
-            await axios.post("http://3.85.135.17:3000/password",{email},{headers:{"Authorization":token}}).then(result=>{
+            await axios.post("http://localhost:3000/password",{email},{headers:{"Authorization":token}}).then(result=>{
                 alert("check your email ")
                 console.log(result)
             }).catch(err=>console.log(err))

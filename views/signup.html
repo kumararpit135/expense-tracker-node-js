@@ -26,7 +26,7 @@
                 Email:document.getElementById('email').value,
                 Password:document.getElementById('password').value
             }
-            axios.post("http://3.85.135.17:3000/signup",myObj).then(result=>{
+            axios.post("http://localhost:3000/signup",myObj).then(result=>{
                 alert("done")
                 window.location.href = "login.html"
                 console.log(result.message);

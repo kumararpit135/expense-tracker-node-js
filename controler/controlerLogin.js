@@ -21,24 +21,24 @@ exports.post=async(req,res)=>{
     try{
         const [user]=await pool.execute("SELECT * FROM users WHERE email =?",[Email])
         console.log(user,'fkdkj')
-        if (user.length>0){
+        if (!user.length){
+            res.status(400).json({message:"you haven't signup",true:false})
 
-
-            const userPassword=user[0].password
+        }
+        
+        
+        const userPassword=user[0].password
+        
+        console.log("password check := "+Password,userPassword)
+        const comaprePassword=await bcrypt.compare(Password,userPassword)
+        if(comaprePassword){
             
-            console.log("password check := "+Password,userPassword)
-            const comaprePassword=await bcrypt.compare(Password,userPassword)
-            if(comaprePassword){
-                
-                res.status(200).json({message:"userlogin doone",true:true,token:generateToekn(user[0].id)});
-            }
-            else{
-                res.status(400).json({message:"password does not match",true:false});
-            }
+            res.status(200).json({message:"userlogin doone",true:true,token:generateToekn(user[0].id)});
         }
         else{
-            res.status(400).json({message:"you haven't signup"})
+            res.status(400).json({message:"password does not match",true:false});
         }
+        
         
     }catch(err){
         res.status(500).json(err)

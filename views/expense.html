@@ -44,7 +44,7 @@
             
             const token=localStorage.getItem('token')
             console.log('hiii')
-            axios.get("http://3.85.135.17:3000/download",{headers:{"Authorization":token}}).then(result=>{
+            axios.get("http://localhost:3000/download",{headers:{"Authorization":token}}).then(result=>{
                 if (result.status===200){
                     const fileUrl=result.data.fileUrl;
                     const a=document.createElement('a');
@@ -61,7 +61,7 @@
 
         async function premiumBtn(){
             const token=localStorage.getItem('token')
-            axios.get("http://3.85.135.17:3000/ispremium",{headers:{"Authorization":token}}).then(result=>{
+            axios.get("http://localhost:3000/ispremium",{headers:{"Authorization":token}}).then(result=>{
                 if (result.data.premium){
                     console.log(result.data.isprem)
                     const premiumDiv=document.getElementById('premium')
@@ -85,7 +85,7 @@
                             alert('token is missing')
                         }
                        
-                        const response=await axios.post("http://3.85.135.17:3000/leaderbord",{headers:{"Authorization":token}})
+                        const response=await axios.post("http://localhost:3000/leaderbord",{headers:{"Authorization":token}})
                         secondDivchild.innerHTML=""
                         const listItem=document.createElement('li')
                         
@@ -131,7 +131,7 @@
             //console.log(myObj)
             const token=localStorage.getItem('token')
             updateTheamount(myObj.expense)
-            axios.post("http://3.85.135.17:3000/expense",myObj,{headers:{"Authorization":token}}).then(result=>{
+            axios.post("http://localhost:3000/expense",myObj,{headers:{"Authorization":token}}).then(result=>{
               //  fetchUser()
                 console.log(result)
                 loadExpenses(currentPage)
@@ -150,7 +150,7 @@
                 alret('Please login again')
             }
             console.log('hihiih')
-            axios.get(`http://3.85.135.17:3000/expense?page=${page}&limit=${limit}`,{headers:{"Authorization":token}}).then(response=>
+            axios.get(`http://localhost:3000/expense?page=${page}&limit=${limit}`,{headers:{"Authorization":token}}).then(response=>
             {   
                 expenseList.innerHTML="";
                 console.log(response.data.expenses)
@@ -198,7 +198,7 @@
 
         function updateTheamount(amount){
             const token=localStorage.getItem('token')
-            axios.post("http://3.85.135.17:3000/updateamount",{expense:amount},{headers:{"Authorization":token}}).then(result=>{
+            axios.post("http://localhost:3000/updateamount",{expense:amount},{headers:{"Authorization":token}}).then(result=>{
                 console.log(result)
             }).catch(err=>{
                 console.log(err)
@@ -227,7 +227,7 @@
 
         function deleteExpense(obj){
             const token=localStorage.getItem('token')
-            axios.delete(`http://3.85.135.17:3000/expense/${obj.id}`,{headers:{"Authorization":token}}).then(result=>{
+            axios.delete(`http://localhost:3000/expense/${obj.id}`,{headers:{"Authorization":token}}).then(result=>{
 
                 fetchUser()
                 //console.log(result)
@@ -240,7 +240,7 @@
 /*
         function fetchUser(){
             const token=localStorage.getItem('token')
-            axios.get("http://3.85.135.17:3000/expense",{headers:{"Authorization":token}}).then(result=>{
+            axios.get("http://localhost:3000/expense",{headers:{"Authorization":token}}).then(result=>{
                 
                 list.innerHTML=""
                 for(let i=0;i<result.data.length;i++){
@@ -262,7 +262,7 @@
                 alert('Please login to buy premium.');
                 return;
             }
-            const response= await axios.get("http://3.85.135.17:3000/premiummembership",{headers:{'Authorization':token}});
+            const response= await axios.get("http://localhost:3000/premiummembership",{headers:{'Authorization':token}});
 
             console.log(response);
             const options = {
@@ -271,7 +271,7 @@
                 'handler': async function(response) {
                     try {
                         console.log("in purchase")
-                        await axios.post('http://3.85.135.17:3000/updatetransactionstatus', {
+                        await axios.post('http://localhost:3000/updatetransactionstatus', {
                             order_id: options.order_id,
                             payment_id: response.razorpay_payment_id
                         }, { headers: { 'Authorization': token } });

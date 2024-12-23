@@ -83,7 +83,7 @@ exports.forget=async(req,res)=>{
             from:'kumararpit994@gmail.com',
             subject:'resert password link',
             text:'click on this link thatsit',
-            html: `<a href="http://3.85.135.17:3000/resetpassword/${userID}">Reset password</a>`
+            html: `<a href="http://localhost:3000/resetpassword/${userID}">Reset password</a>`
         }]
         await sgMail.send(msg)
         res.status(200).json("done here everything")

@@ -21,7 +21,7 @@
             const password=document.getElementById('password').value;
             const token=localStorage.getItem('token')
             console.log(password)
-            await axios.post("http://3.85.135.17:3000/reset",{password},{headers:{"Authorization":token}}).then(result=>{
+            await axios.post("http://localhost:3000/reset",{password},{headers:{"Authorization":token}}).then(result=>{
                 console.log(result)
                 alert("password has been successfuly updated")
                 window.location.href="login.html"
