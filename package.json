@@ -2,22 +2,25 @@
   "name": "nodejs-complete-guide",
   "version": "1.0.0",
   "description": "Complete Node.js Guide",
-  "main": "app.js",
+  "main": "typescriptapp.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js",
-    "start-server": "node app.js"
+    "start": "typescriptapp.js",
+    "start-server": "typescriptapp.js"
   },
   "author": "Maximilian Schwarzmüller",
   "license": "ISC",
   "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.2",
+    "body-parser": "^1.20.3",
     "nodemon": "^3.1.7"
   },
   "dependencies": {
     "@sendgrid/mail": "^8.1.4",
     "aws-sdk": "^2.1692.0",
     "bcrypt": "^5.1.1",
-    "body-parser": "^1.20.3",
     "compression": "^1.7.5",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
