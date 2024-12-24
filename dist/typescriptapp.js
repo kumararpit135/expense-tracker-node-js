@@ -10,4 +10,8 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const app = (0, express_1.default)();
 app.use(body_parser_1.default.json());
 app.use(todos_1.default);
+app.use('/', (req, res) => {
+    console.log('hfdkjhfjk');
+    res.send('fsdfhdsk');
+});
 app.listen(3000);

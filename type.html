@@ -8,7 +8,7 @@
 <body>
     <form id="form"><label for="text">Text</label>
     <input type="text" id="text" name="text">
-    <button type="submit"></button>
+    <button type="submit">button</button>
     </form>
 
     
@@ -16,9 +16,16 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     const form=document.getElementById('form')
-    form.addEventListener('submit',()=>{
-
+    form.addEventListener('submit',(event)=>{
+        event.preventDefault()
+        const myObj={
+            text:document.getElementById('text').value
+        }
         
+        axios.post('http://localhost:3000/post',{myObj}).then(res=>{
+            console.log(res)
+        }).catch(err=>console.log(err))
+
     })
 </script>
 
